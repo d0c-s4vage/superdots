@@ -14,6 +14,13 @@ let mapleader = ","
 " aka       set backspace=2
 set backspace=indent,eol,start
 
+" Markdown and RST settings that use TagList
+au BufNewFile,BufRead *.md set filetype=markdown
+let g:tlist_markdown_settings = "markdown;h:Headlins"
+au BufRead,BufNewFile *.rst,*.txt,*.tex,*.pgp,*.md set wrap linebreak nolist textwidth=80 wrapmargin=0
+au BufRead,BufNewFile *.rst,*.txt,*.tex,*.pgp,*.md setlocal spelllang=en_us spell complete+=kspell
+nmap <C-T> :TlistToggle<CR>
+
 "
 " ----------------------
 " if no files are specified, open nerdtree
@@ -30,8 +37,25 @@ if has("mouse")
 	set ttymouse=xterm2
 endif
 
-au WinEnter * :set relativenumber
-au WinLeave * :set norelativenumber
+function! CScopeSearch(type, tag)
+	tabnew
+	execute "tab lcs find " . a:type . " " . a:tag
+	lop
+	wincmd k
+endfunction
+
+function! MaybeSetRelative()
+	if &number
+		set relativenumber
+	endif
+endfunction
+function! MaybeClearRelative()
+	if &number
+		set norelativenumber
+	endif
+endfunction
+au WinEnter * :call MaybeSetRelative()
+au WinLeave * :call MaybeClearRelative()
 
 syntax enable
 set number
