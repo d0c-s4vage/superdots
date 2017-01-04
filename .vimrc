@@ -8,11 +8,69 @@ let mapleader = ","
 " a.vim - switch from 
 " marks.vim
 " easy motion
+
+" make YCM compatible with UltiSnips (using supertab)
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"let g:ycm_filetype_whitelist = {
+""	\ 'cpp'    : 1,
+""	\ 'c'      : 1,
+""	\ 'python' : 1,
+""	\ 'java'   : 1,
+""	\ 'bash'   : 1,
+""	\ 'ruby'   : 1,
+""	\ 'sh'     : 1,
+""	\ 'json'   : 1,
+"\ }
+"let g:ycm_filetype_blacklist = {
+""	\ '*.enc.*'    : 1,
+"\ }
+
+
+
+autocmd FileType python setlocal omnifunc=jedi#completions
+let g:jedi#completions_enabled = 1
+let g:jedi#auto_vim_configuration = 1
+
+function! JediVimTabDefinition()
+	let g:jedi#use_tabs_not_buffers = 1
+	call jedi#goto()
+	let g:jedi#use_tabs_not_buffers = 0
+endfunction
+nnoremap <leader>D :call JediVimTabDefinition()<CR>
+
+"let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+" alternative pattern: '\h\w*\|[^. \t]\.\w*'
+
+
 "
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabContextTextMemberPatterns = ['\.', '>\?::', '->']
+ 
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:ultisnips_python_style="v_sphinx"
+let g:UltiSnipsEditSplit="vertical"
+
 
 " backspace over everything in insert mode
 " aka       set backspace=2
 set backspace=indent,eol,start
+
+
+autocmd BufRead,BufNewFile *.md setlocal spell | setlocal complete+=kspell
+autocmd BufReadPost *.smt,*.smt2 setlocal syntax=scheme | setlocal filetype=scheme
+
+
+" -----------------------------------
+"  TABULARIZE
+" -----------------------------------
+vmap <C-y> :/^\s*[^#]/Tabularize /=.*<CR>
+vmap & :/^\s*[^#]/Tabularize /\:.*<CR>
+vmap <C-k> :/^\s*/Tabularize /\#.*<CR>
+
 
 "
 " ----------------------
@@ -25,23 +83,27 @@ map <C-O> :NERDTreeToggle<CR>
 
 nmap s <Plug>(easymotion-s)
 
-if has("mouse")
-	set mouse=a
-	set ttymouse=xterm2
-endif
-
-au WinEnter * :set relativenumber
-au WinLeave * :set norelativenumber
+"au WinEnter * :set relativenumber
+"au WinLeave * :set norelativenumber
 
 syntax enable
 set number
 set relativenumber
 nnoremap <F10> :set norelativenumber!<CR>
+
+function! CscopeRefresh()
+	echo 
+	silent !bash -ic g__cscope_refresh
+	silent cs reset
+endfunction
+nnoremap <F5> :call CscopeRefresh()<CR>
 set autoindent
 " set expandtab
 set tabstop=4
 set shiftwidth=4
 set smartindent
+set smarttab
+set smartcase
 set pastetoggle=<F12>
 set nowrap
 set incsearch
@@ -75,10 +137,11 @@ let g:ctrlp_follow_symlinks=1
 let g:ctrlp_working_path_mode=''
 
 function! SetupPython()
-	set tabstop=4
-	set shiftwidth=4
-	set noexpandtab
+	setlocal tabstop=4
+	setlocal shiftwidth=4
+	setlocal expandtab
 endfunction
+autocmd Filetype python call SetupPython()
 
 function! LExCmd(...)
 	"!ag -R -l --nocolor " a:000 " * >/tmp/lgrep.txt"
@@ -94,9 +157,29 @@ command! -nargs=+ -complete=file LlExCmd call LExCmd(<f-args>)
 map ,A :LlExCmd 
 
 function! LGrep(...)
+	" find the project root
+	let max = 10
+	let c = 0
+	let dots = ""
+	while c <= max
+		if filereadable(dots . "cscope.out")
+			break
+		else
+			let dots = dots . "../"
+		endif
+		let c += 1
+	endwhile
+
 	tabnew
+
+	" if we found the project root (cscope.out), then search from there
+	if filereadable(dots . "cscope.out")
+		execute "silent! !ag -R --ignore '*test*' --ignore '*tests*' --ignore '*cscope*' --ignore 'tags' --nogroup --nocolor " join(a:000, " ") " " . dots . " >/tmp/lgrep.txt"
+	else
+		execute "silent! !ag -R --ignore '*test*' --ignore '*tests*' --ignore '*cscope*' --ignore 'tags' --nogroup --nocolor " join(a:000, " ") " . >/tmp/lgrep.txt"
+	endif
 	"!ag -R -l --nocolor " a:000 " * >/tmp/lgrep.txt"
-	execute "silent! !ag -R --ignore '*test*' --ignore '*tests*' --ignore '*cscope*' --ignore 'tags' --nogroup --nocolor " join(a:000, " ") " . >/tmp/lgrep.txt"
+	"
 	lf /tmp/lgrep.txt
 	lop
 	redraw!
@@ -194,10 +277,10 @@ nnoremap <silent> ,b :TagbarToggle<CR>
 
 " -----------------------------
 
-map <C-H> :vertical resize -1<CR>
-map <C-J> :resize +1<CR>
-map <C-K> :resize -1<CR>
-map <C-L> :vertical resize +1<CR>
+"map <C-H> :vertical resize -1<CR>
+"map <C-J> :resize +1<CR>
+"map <C-K> :resize -1<CR>
+"map <C-L> :vertical resize +1<CR>
 map <C-S-I> @a
 
 map ,c :tabc<CR>
@@ -210,3 +293,63 @@ map ,ss :w<CR>:!git add % ; git commit -m "syncing" %<CR>
 map ,p yypVr-yykPj
 
 let g:ctrlp_root_markers = ['cscope.out', 'pct.sqlite', 'ctags']
+
+
+
+" -------------------------------------------------------
+"  pymode
+" -------------------------------------------------------
+
+let g:pymode_breakpoint = 0
+let g:pymode_lint_on_fly = 0
+let g:pymode_lint_on_write = 1
+let g:pymode_rope = 0
+let g:pymode_folding = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope_completion = 0
+
+
+" ----------------------------------
+" HTML TAG COMPLETION
+" ----------------------------------
+
+" iabbrev <// </<C-X><C-O>
+imap <C-Space> </<C-X><C-O>
+
+
+" ----------------------------------
+" vim-morph settings
+" ----------------------------------
+
+let g:Morph_PostMorphRestore = 1
+
+
+function! PythonAddImportInsertLeave(insert_mode)
+	execute "normal! V/import.*$\\n\\s*\\n\<CR>"
+	execute "normal! !sort|uniq\<CR>"
+	execute "normal! `mzz"
+
+	" remove import auto-cmd
+	autocmd! PythonAddImport *
+
+	if a:insert_mode
+		call feedkeys("a")
+	endif
+endfunction
+
+function! PythonAddImport(insert_mode)
+	if &filetype != "python"
+		return
+	endif
+
+	execute "normal! mmgg/^import\<CR>Oimport\<space>"
+
+	augroup PythonAddImport
+		execute "autocmd InsertLeave <buffer> :call PythonAddImportInsertLeave(". a:insert_mode .")"
+	augroup end
+
+	startinsert!
+endfunction
+nnoremap <C-j> :call PythonAddImport(0)<CR>
+inoremap <C-j> <ESC>:call PythonAddImport(1)<CR>
