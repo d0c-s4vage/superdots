@@ -59,7 +59,6 @@ let g:UltiSnipsEditSplit="vertical"
 " aka       set backspace=2
 set backspace=indent,eol,start
 
-
 autocmd BufRead,BufNewFile *.md setlocal spell | setlocal complete+=kspell
 autocmd BufReadPost *.smt,*.smt2 setlocal syntax=scheme | setlocal filetype=scheme
 
@@ -71,6 +70,12 @@ vmap <C-y> :/^\s*[^#]/Tabularize /=.*<CR>
 vmap & :/^\s*[^#]/Tabularize /\:.*<CR>
 vmap <C-k> :/^\s*/Tabularize /\#.*<CR>
 
+" Markdown and RST settings that use TagList
+au BufNewFile,BufRead *.md set filetype=markdown
+let g:tlist_markdown_settings = "markdown;h:Headlins"
+au BufRead,BufNewFile *.rst,*.txt,*.tex,*.pgp,*.md set wrap linebreak nolist textwidth=80 wrapmargin=0
+au BufRead,BufNewFile *.rst,*.txt,*.tex,*.pgp,*.md setlocal spelllang=en_us spell complete+=kspell
+nmap <C-T> :TlistToggle<CR>
 
 "
 " ----------------------
@@ -83,8 +88,30 @@ map <C-O> :NERDTreeToggle<CR>
 
 nmap s <Plug>(easymotion-s)
 
-"au WinEnter * :set relativenumber
-"au WinLeave * :set norelativenumber
+if has("mouse")
+	set mouse=a
+	set ttymouse=xterm2
+endif
+
+function! CScopeSearch(type, tag)
+	tabnew
+	execute "tab lcs find " . a:type . " " . a:tag
+	lop
+	wincmd k
+endfunction
+
+function! MaybeSetRelative()
+	if &number
+		set relativenumber
+	endif
+endfunction
+function! MaybeClearRelative()
+	if &number
+		set norelativenumber
+	endif
+endfunction
+au WinEnter * :call MaybeSetRelative()
+au WinLeave * :call MaybeClearRelative()
 
 syntax enable
 set number
