@@ -1,0 +1,23 @@
+startup_message off
+hardstatus string '%{= kG}%{= kw}%?%-Lw%?%{R}<%{R}%n*%f%t%?(%u)%?%{R}>%{w}%?%+Lw%?%?%= %{g}%{B} %d/%m %{W}%c %{g}'
+hardstatus alwayslastline
+vbell off
+scrollback 10000
+
+# from https://gist.github.com/joaopizani/2718397
+# use hjkl keys to resize regions
+bindkey "^[OQ" eval "command -c rsz" # enter resize mode
+bind -c rsz h eval "resize -h -2" "command -c rsz"
+bind -c rsz j eval "resize -v -2" "command -c rsz"
+bind -c rsz k eval "resize -v +2" "command -c rsz"
+bind -c rsz l eval "resize -h +2" "command -c rsz"
+
+bind -c rsz \t    eval "focus"       "command -c rsz" # Tab
+bind -c rsz -k kl eval "focus left"  "command -c rsz" # Left
+bind -c rsz -k kr eval "focus right" "command -c rsz" # Right
+bind -c rsz -k ku eval "focus up"    "command -c rsz" # Up
+bind -c rsz -k kd eval "focus down"  "command -c rsz" # Down
+
+rendition so kb
+
+term xterm-256color
