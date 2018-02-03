@@ -2,6 +2,8 @@
 " aka       set backspace=2
 set backspace=indent,eol,start
 
+set updatetime=250
+
 "set autoindent
 set expandtab
 set tabstop=4
@@ -13,9 +15,9 @@ set pastetoggle=<F12>
 set nowrap
 set incsearch
 set cmdheight=2
+set colorcolumn=80
 
 colors jellybeans
-
 
 function! MaybeSetRelative()
     if &number

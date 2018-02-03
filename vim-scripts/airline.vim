@@ -10,7 +10,7 @@ let g:airline#extensions#tabline#enabled = 1
 "let g:airline_symbols.space = "\ua0"
 
 function! DoAirlineInit()
-    AirlineTheme luna
+    AirlineTheme bubblegum
 endfunction
 
 autocmd! User AirlineAfterInit call DoAirlineInit()
