@@ -1,3 +1,4 @@
+let g:gitgutter_realtime = 1
 
 nmap <F10> :GitGutterLineHighlightsToggle<CR>
 vmap <F10> :GitGutterLineHighlightsToggle<CR>

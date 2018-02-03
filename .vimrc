@@ -1,3 +1,9 @@
+let s:this_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
+
+" copy everything in vim-scripts/after/colors to ~/.vim/after/colors
+call system("rm -rf ~/.vim/after/colors")
+call system("cp -r ".s:this_dir."/vim-scripts/after/colors ~/.vim/after/colors")
+
 
 " vim-plug
 call plug#begin('~/.vim/plugged')
@@ -16,6 +22,7 @@ Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline', { 'do': ':AirlineTheme luna'}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/AfterColors.vim'
 
 call plug#end()
 
@@ -25,7 +32,6 @@ let mapleader = ","
 set laststatus=2
 
 " Folder in which script resides: (not safe for symlinks)
-let s:this_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 let s:vim_scripts = s:this_dir."/vim-scripts"
 for f in split(glob(s:vim_scripts."/*.vim"), '\n')
     exe 'source' f
