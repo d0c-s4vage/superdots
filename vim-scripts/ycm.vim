@@ -6,3 +6,5 @@ let g:ycm_rust_src_path = "~/.cargo/bin"
 
 nnoremap <leader>g :YcmCompleter GoTo<CR>
 nnoremap <leader>r :YcmCompleter GoToReferences<CR>
+
+let g:ycm_rust_src_path = "/home/james/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"

@@ -27,6 +27,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'nanotech/jellybeans.vim'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'vim-scripts/AfterColors.vim'
+Plug 'd0c-s4vage/pct-vim', {'branch': 'feature-threads_and_tags'}
 
 call plug#end()
 
