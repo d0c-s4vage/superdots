@@ -3,7 +3,9 @@ DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 
 # source all bash source files
 for file in "$DIR"/bash-sources/*.sh ; do
-    echo "SOURCING $file"
+    if [ ! -z "$YOUR_MOM_DEBUG" ] ; then
+        echo "Sourcing $file"
+    fi
     . "$file"
 done
 
