@@ -13,7 +13,7 @@ function browse {
         error=true
     fi
     if [ -z "$PROXY_PORT" ] ; then
-        echo "PROXY_SSH_KEY must be set"
+        echo "PROXY_PORT must be set"
         error=true
     fi
     if [ "$error" = true ] ; then
