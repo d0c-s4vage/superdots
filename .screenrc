@@ -1,5 +1,6 @@
 startup_message off
-hardstatus string '%{= kG}%{= kw}%?%-Lw%?%{R}<%{R}%n*%f%t%?(%u)%?%{R}>%{w}%?%+Lw%?%?%= %{g}%{B} %d/%m %{W}%c %{g}'
+backtick 1 0 1 /home/james/usr/bin/git-current-branch
+hardstatus string '%{= kG}%{= kw}%?%-Lw%?%{R}<%{R}%n*%f%t%?(%u)%?%{R}>%{w}%?%+Lw%?%?%= %{g}%{B} %d/%m %{W}%c %{g} %1`'
 hardstatus alwayslastline
 vbell off
 scrollback 10000
