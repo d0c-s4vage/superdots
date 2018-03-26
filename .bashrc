@@ -1,4 +1,5 @@
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+export YOUR_MOM="$DIR"
 
 
 # source all bash source files
