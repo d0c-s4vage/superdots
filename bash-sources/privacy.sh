@@ -2,6 +2,7 @@
 PROXY_HOST=""
 PROXY_SSH_KEY=""
 PROXY_PORT=7070
+PROXY_BROWSER="chromium-browser"
 function browse {
     error=false
     if [ -z "$PROXY_HOST" ] ; then
@@ -30,7 +31,7 @@ function browse {
         rm -rf "$proxy_dir"
     fi
     CMD=(
-        google-chrome
+        $PROXY_BROWSER
             --no-first-run
             --no-default-browser-check
             --user-data-dir="$proxy_dir"
