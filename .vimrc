@@ -1,5 +1,11 @@
 let s:this_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 " copy everything in vim-scripts/after/colors to ~/.vim/after/colors
 call system("rm -rf ~/.vim/after/colors")
 call system("cp -r ".s:this_dir."/vim-scripts/after/colors ~/.vim/after/colors")
@@ -27,7 +33,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'nanotech/jellybeans.vim'
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'vim-scripts/AfterColors.vim'
-Plug 'd0c-s4vage/pct-vim', {'branch': 'feature-threads_and_tags'}
+"Plug 'd0c-s4vage/pct-vim', {'branch': 'feature-threads_and_tags'}
 
 call plug#end()
 

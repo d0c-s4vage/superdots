@@ -1,5 +1,5 @@
 
-alias vim='gvim -v'
+#alias vim='gvim -v'
 alias ngrep="grep -n"
 alias vimin="vim +'set bt=nowrite' -"
 alias nossh="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
