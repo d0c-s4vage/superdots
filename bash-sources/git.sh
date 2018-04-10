@@ -5,3 +5,5 @@ function git_parent_branch {
 function git_clean {
     git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
 }
+
+git config --global diff.tool vimdiff
