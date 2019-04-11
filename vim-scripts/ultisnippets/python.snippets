@@ -1,0 +1,73 @@
+snippet notimpl
+raise NotImplementedError("$1${2: is not implemented}")
+endsnippet
+
+snippet script
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+"""
+${1:Use this script to do something}
+"""
+
+
+import argparse
+import os
+import sys
+
+
+
+def parse_args(argv):
+	class ArgParser(argparse.ArgumentParser):
+		def format_help(self):
+			return __doc__
+
+    parser = ArgParser()
+
+	${0}
+
+    return parser.parse_args(argv[1:])
+
+
+def main(argv):
+    """Main function for this script
+
+    :argv: TODO
+    :returns: TODO
+    """
+    args = parse_args(argv)
+
+
+if __name__ == "__main__":
+    main(sys.argv)
+endsnippet
+
+snippet arg_bool
+parser.add_argument("-${1}", "--${2}",
+	action="store_${3:true}",
+	default=${4:False},
+	help="${5:Help text for $2}",
+)${0}
+endsnippet
+
+snippet arg_list
+parser.add_argument("-${1}", "--${2}",
+	nargs="*",
+	help="${5:Help text for $2}",
+)${0}
+endsnippet
+
+snippet arg_list_plain
+parser.add_argument("${1:items}",
+	nargs="*",
+	help="${5:Help text for $1}",
+)${0}
+endsnippet
+
+snippet arg
+parser.add_argument("-${1}", "--${2}",
+	default=${4:"some_value"},
+	help="${5:Help text for $2}",
+)${0}
+endsnippet

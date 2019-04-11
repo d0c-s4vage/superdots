@@ -20,21 +20,31 @@ Plug 'vim-syntastic/syntastic'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'd0c-s4vage/vim-morph'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --go-completer --js-completer --rust-completer' }
+Plug 'shawncplus/phpcomplete.vim'
+
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'roxma/nvim-yarp'
+"Plug 'roxma/vim-hug-neovim-rpc'
+"let g:deoplete#enable_at_startup = 1
+
+Plug 'kien/ctrlp.vim'
+Plug 'davidhalter/jedi-vim'
+
 Plug 'ervandew/supertab'
-Plug 'nvie/vim-flake8'
+"Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-fugitive'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'scrooloose/nerdtree'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline', { 'do': ':AirlineTheme luna'}
 Plug 'vim-airline/vim-airline-themes'
 Plug 'airblade/vim-gitgutter'
 Plug 'nanotech/jellybeans.vim'
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable'}
 Plug 'vim-scripts/AfterColors.vim'
 "Plug 'd0c-s4vage/pct-vim', {'branch': 'feature-threads_and_tags'}
+"Plug 'd0c-s4vage/pfp-vim'
+Plug 'godlygeek/tabular'
 
 call plug#end()
 

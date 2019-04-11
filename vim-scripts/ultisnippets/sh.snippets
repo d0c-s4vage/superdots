@@ -1,0 +1,108 @@
+snippet wrap-script
+#!/usr/bin/env bash
+
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+THIS_PROG="\$0"
+SUBPROGRAM="${1:ls}"
+
+
+function show_help {
+    cat <<-EOF
+USAGE: $THIS_PROG -o OPTVAL [-f] [--help] [-- ${2:FORWARDED-OPTIONS}]
+
+This script wraps the '$SUBPROGRAM' program:
+
+            --flag,-f   Boolean flag option
+             --opt,-o   User-provided option value
+            --help,-h   Show this help message
+                --      All parameters following '--' will be forwarded
+EOF
+}
+
+
+function validate_options {
+	error=false
+
+	if [ -z "$OPT" ] ; then
+		echo "--opt must be set"
+		error=true
+	fi
+
+	if [ "$error" = true ] ; then 
+		echo "Error validating options"
+		echo
+		show_help
+		exit 1
+	fi
+}
+
+
+function run_program {
+	CMD=(
+		"$SUBPROGRAM"
+
+		# default wrapped program options
+		${3:-la}
+
+		"${$2[@]}"
+	)
+	echo "running command ${CMD[*]}"
+	"${CMD[@]}"
+}
+
+
+FLAG=false
+OPT=""
+
+
+$2=()
+
+
+while [ $# -ne 0 ] ; do
+    param="\$1"
+    shift
+
+    case "$param" in
+        --)
+            while [ $# -ne 0 ] ; do
+                $2+=("\$1")
+                shift
+            done
+            ;;
+        --help|-h)
+            show_help
+            exit 1
+            ;;
+        --flag|-f)
+            FLAG=true
+            ;;
+        --opt|-o)
+            OPT="\$1"
+			shift
+            ;;
+        *)
+            echo "[!] Unrecognized parameter $param"
+            echo
+            show_help
+            exit 1
+            ;;
+    esac
+done
+
+
+validate_options
+run_program
+EXIT_CODE=$?
+
+
+echo "Exit code: $EXIT_CODE"
+
+
+if [ $EXIT_CODE -eq 0 ] ; then
+    echo "Success"
+else
+    echo "Failure"
+fi
+exit $EXIT_CODE
+endsnippet

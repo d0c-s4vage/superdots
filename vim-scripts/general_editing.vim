@@ -56,7 +56,7 @@ function! ReplaceWord()
 endfunction
 map <leader>R :call ReplaceWord()<CR>
 
-map ,c :tabc<CR>
+map <leader>c :tabc<CR>
 
 
 

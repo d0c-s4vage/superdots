@@ -1,17 +1,31 @@
 
 PROXY_HOST=""
 PROXY_SSH_KEY=""
-PROXY_PORT=7070
+PROXY_BIND_IP=""
+PROXY_PORT_SOCKS=7070
+PROXY_PORT_HTTP=8888
+PROXY_PORT_HTTP_REMOTE=8888
 PROXY_BROWSER="chromium-browser"
 
 function ssh_setup {
     ssh-add -l | grep -q $(realpath "$PROXY_SSH_KEY") || ssh-add "$PROXY_SSH_KEY"
 
-    ssh -D "$PROXY_PORT" -N -C -q -N "$PROXY_HOST" &
-    sshpid=$!
+    ssh_opts=""
 
-    echo "waiting for proxy to spin up before launching browser"
-    sleep 5
+    bind_opt=""
+    if [ ! -z "$PROXY_BIND_IP" ] ; then
+        bind_opt="$PROXY_BIND_IP:"
+    fi
+
+    ssh \
+        -D "$bind_opt""$PROXY_PORT_SOCKS" \
+        -L "$bind_opt""$PROXY_PORT_HTTP:localhost:$PROXY_PORT_HTTP_REMOTE" \
+        -N \
+        -q \
+        "$PROXY_HOST" \
+        &
+
+    sshpid=$!
 }
 
 function ssh_teardown {
@@ -44,10 +58,16 @@ function pcurl {
 }
 
 
+function browse_vm {
+    ssh_setup
+}
+
+
 function browse {
     setup_urls=(
         https://chrome.google.com/webstore/detail/ublock-origin/cjpalhdlnbpafiamejdnhcphjbkeiagm
-        https://chrome.google.com/webstore/detail/https-everywhere/gcbommkclmclpchllfjekcdonpmejbdp
+        #https://chrome.google.com/webstore/detail/https-everywhere/gcbommkclmclpchllfjekcdonpmejbdp
+        https://chrome.google.com/webstore/detail/user-agent-switcher-for-c/djflhoibgkdhkhhcedjiklpkjnoahfmg
         https://chrome.google.com/webstore/detail/duckduckgo-privacy-essent/bkdgflcldnnnapblkhphbgpggdiikppg
     )
 
@@ -58,7 +78,7 @@ function browse {
 
     ssh_setup
 
-    proxy_dir="/tmp/chrome_browse"
+    proxy_dir=$(mktemp -d)
     if [ -d "$proxy_dir" ] ; then
         rm -rf "$proxy_dir"
     fi
@@ -68,6 +88,7 @@ function browse {
             --no-default-browser-check
             --user-data-dir="$proxy_dir"
             --proxy-server=socks5://127.0.0.1:"$PROXY_PORT"
+            --disable-gpu
             --host-resolver-rules="MAP * ~NOTFOUND , EXCLUDE 127.0.0.1"
             "${setup_urls[@]}"
             $@

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+
+THIS_PROG="$0"
+
+function show_usage() {
+    cat <<-EOF
+USAGE: $THIS_PROG SEARCH_REGEX CMD_TO_RUN
+
+CMD_TO_RUN will be executed directly, with the variable \$MATCH being defined
+with the match from SEARCH_REGEX
+EOF
+}
+
+if [ $# -ne 2 ] ; then
+    show_usage
+    exit 1
+fi
+
+SEARCH_REGEX="$1"
+CMD_TO_RUN="$2"
+
+while read line ; do
+    MATCH=$(echo "$line" | python <(cat <<-EOF
+import re, sys
+match = re.search('$SEARCH_REGEX', sys.stdin.readline().strip())
+if match is None:
+    exit(1)
+if len(match.groups()) > 0:
+    print(match.group(1))
+else:
+    print(match.string)
+EOF
+))
+    export MATCH
+    if [ $? -ne 0 ] ; then
+        continue
+    fi
+    echo "$(date) $MATCH"
+    eval "$CMD_TO_RUN"
+done

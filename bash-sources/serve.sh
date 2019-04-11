@@ -1,6 +1,36 @@
 
 function g__srv_nginx {
-    docker run --rm -p 0.0.0.0:8080:80 -v $(pwd):/usr/share/nginx/html:ro nginx
+    tmpdir=$(tempfile)
+    rm "$tmpdir" && mkdir -p "$tmpdir"
+    (
+        cd "$tmpdir"
+        cat <<-EOF > default.conf
+server {
+    listen       80;
+    server_name  localhost;
+
+    location / {
+        root   /usr/share/nginx/html;
+        autoindex on;
+    }
+
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+}
+EOF
+    )
+    CMD=(
+        sudo docker run
+            --rm
+            -p 0.0.0.0:9090:80
+            -v "$tmpdir":/etc/nginx/conf.d/
+            -v $(pwd):/usr/share/nginx/html:ro
+            nginx
+    )
+    "${CMD[@]}"
+    rm -rf "$tmpdir"
 }
 
 function g__previewmd {

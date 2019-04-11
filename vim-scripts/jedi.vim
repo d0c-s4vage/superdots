@@ -1,3 +1,5 @@
+let g:jedi#force_py_version=3
+let g:jedi#popup_on_dot = 1
 let g:jedi#show_call_signatures = 1
 let g:jedi#use_splits_not_buffers = "left"
 let g:jedi#popup_select_first = 0

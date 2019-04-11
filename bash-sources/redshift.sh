@@ -12,6 +12,7 @@ function brighter {
 function apply_redshift_settings {
     echo "     gamma = $RS_gamma"
     echo "brightness = $RS_bright"
+    RS_gamma=$(python -c "print(int(float($RS_bright)*3500))")
     CMD=(
         redshift
             -O $RS_gamma

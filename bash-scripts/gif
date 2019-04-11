@@ -1,0 +1,45 @@
+#!/bin/bash
+
+
+if ! which byzanz-record >/dev/null ; then
+    echo "Installing byzanz..."
+    sudo apt-get install byzanz
+fi
+
+if ! which xrectsel >/dev/null ; then
+    echo "Cloning and building xrectsel"
+    echo "Dependencies also include autoconf and libx11-dev"
+    tmpd=$(tempfile)
+    rm "$tmpd"
+    mkdir "$tmpd"
+    (
+        git clone https://github.com/lolilolicon/xrectsel "$tmpd"/xrectsel
+        cd "$tmpd/xrectsel"
+        ./bootstrap
+        make
+        sudo mv ./xrectsel ~/usr/bin
+    )
+    echo "$tmpd"
+    #rm -rf "$tmpd"
+fi
+
+if [ "$1" == "--help" ] ; then
+    cat <<-EOF
+USAGE: $0 [DURATION] [OUTPUT]
+
+   DURATION  how long to record for (default=5)
+   OUTPUT    output file (default=/tmp/gif.gif)
+EOF
+fi
+
+duration=${1:-5}
+output=${2:-/tmp/gif.gif}
+
+byzanz-record \
+    --delay 0 \
+    $(xrectsel "--x=%x --y=%y --width=%w --height=%h") \
+    --duration "$duration" \
+    --cursor \
+    "$output"
+
+nautilus -s "$output" >/dev/null 2>/dev/null
