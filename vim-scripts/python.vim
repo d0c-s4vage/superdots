@@ -103,3 +103,6 @@ endfunction
 
 nnoremap <C-j> :call PythonAddImport(0)<CR>
 inoremap <C-j> <ESC>:call PythonAddImport(1)<CR>
+
+
+messages clear

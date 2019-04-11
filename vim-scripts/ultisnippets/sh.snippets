@@ -1,3 +1,69 @@
+snippet #!
+#!/usr/bin/env bash
+
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+THIS_PROG="\$0"
+
+
+$0
+endsnippet
+
+snippet help
+function show_help {
+    cat <<-EOF
+USAGE: $THIS_PROG -o OPTVAL [-f] [--help]
+
+This script $1
+
+            --flag,-f   Boolean flag option
+             --opt,-o   User-provided option value
+            --help,-h   Show this help message
+                --      All parameters following '--' will be forwarded
+EOF
+}
+
+
+$0
+endsnippet
+
+snippet args
+FLAG=false
+OPT=""
+${2:OTHER_OPTS}=()
+
+while [ $# -ne 0 ] ; do
+    param="\$1"
+    shift
+
+    case "$param" in
+        --)
+            while [ $# -ne 0 ] ; do
+                $2+=("\$1")
+                shift
+            done
+            ;;
+        --help|-h)
+            show_help
+            exit 1
+            ;;
+        --flag|-f)
+            FLAG=true
+            ;;
+        --opt|-o)
+            OPT="\$1"
+			shift
+            ;;
+        *)
+            echo "[!] Unrecognized parameter $param"
+            echo
+            show_help
+            exit 1
+            ;;
+    esac
+done
+endsnippet
+
 snippet wrap-script
 #!/usr/bin/env bash
 

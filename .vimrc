@@ -7,8 +7,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " copy everything in vim-scripts/after/colors to ~/.vim/after/colors
-call system("rm -rf ~/.vim/after/colors")
-call system("cp -r ".s:this_dir."/vim-scripts/after/colors ~/.vim/after/colors")
+" call system("rm -rf ~/.vim/after/colors")
+" call system("cp -r ".s:this_dir."/vim-scripts/after/colors ~/.vim/after/colors")
 
 
 " vim-plug
@@ -29,21 +29,25 @@ Plug 'shawncplus/phpcomplete.vim'
 
 Plug 'kien/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
+Plug 'guns/xterm-color-table.vim'
+
+"php
+Plug 'shawncplus/phpcomplete.vim'
 
 Plug 'ervandew/supertab'
-"Plug 'nvie/vim-flake8'
+Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-fugitive'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'scrooloose/nerdtree'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'fatih/vim-go'
 Plug 'majutsushi/tagbar'
-Plug 'vim-airline/vim-airline', { 'do': ':AirlineTheme luna'}
-Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes', { 'do': ':AirlineTheme tomorrow'}
 Plug 'airblade/vim-gitgutter'
 Plug 'nanotech/jellybeans.vim'
 Plug 'vim-scripts/AfterColors.vim'
-"Plug 'd0c-s4vage/pct-vim', {'branch': 'feature-threads_and_tags'}
-"Plug 'd0c-s4vage/pfp-vim'
+Plug 'd0c-s4vage/pct-vim', {'branch': 'feature-threads_and_tags'}
+Plug 'd0c-s4vage/pfp-vim'
 Plug 'godlygeek/tabular'
 
 call plug#end()
@@ -58,3 +62,5 @@ let s:vim_scripts = s:this_dir."/vim-scripts"
 for f in split(glob(s:vim_scripts."/*.vim"), '\n')
     exe 'source' f
 endfor
+
+exe "source ".s:this_dir."/vim-scripts/after/colors/jellybeans.vim"

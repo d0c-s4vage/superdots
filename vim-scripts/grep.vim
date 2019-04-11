@@ -1,4 +1,4 @@
-nmap ,g :tabnew<bar>:lgrep -R
+"nmap ,g :tabnew<bar>:lgrep -R
 
 " use silver searcher instead of grep
 if executable('rg')

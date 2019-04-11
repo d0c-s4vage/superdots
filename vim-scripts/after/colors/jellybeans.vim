@@ -17,4 +17,7 @@ hi GitGutterAddInvisible ctermfg=234 ctermbg=234 guifg=bg guibg=#151515
 hi GitGutterChangeInvisible ctermfg=234 ctermbg=234 guifg=bg guibg=#151515
 hi GitGutterDeleteInvisible ctermfg=234 ctermbg=234 guifg=bg guibg=#151515
 
-hi DiffText ctermfg=16 ctermbg=165 cterm=None
+hi DiffAdd ctermfg=28 ctermbg=235
+hi DiffDelete ctermfg=196 ctermbg=235 cterm=bold
+hi DiffChange ctermfg=127 ctermbg=235 cterm=bold
+hi DiffText ctermfg=127 ctermbg=235 cterm=bold
