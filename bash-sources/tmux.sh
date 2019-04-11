@@ -1,5 +1,10 @@
 #!/bin/bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+
+if [ ! -f ~/.bash_completion ] || ! grep "complete -F _work work" ~/.bash_completion ; then
+    echo -e ". '$DIR/tmux_work_completion' ; complete -F _work work" >> ~/.bash_completion
+fi
 
 function work {
     session_name="$1"

@@ -1,0 +1,10 @@
+function _work() {
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD]}"
+    opts="$(tmux ls | awk '{print $1}' | sed 's/://g' | grep -v '.*-[0-9]*$')"
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
+}
