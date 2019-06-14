@@ -15,12 +15,13 @@ endif
 call plug#begin('~/.vim/plugged')
 
 
-Plug 'rust-lang/rust.vim'
+"Plug 'rust-lang/rust.vim'
+Plug 'vim-scripts/SyntaxRange'
 Plug 'vim-syntastic/syntastic'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'd0c-s4vage/vim-morph'
-Plug 'shawncplus/phpcomplete.vim'
+"Plug 'shawncplus/phpcomplete.vim'
 
 "Plug 'Shougo/deoplete.nvim'
 "Plug 'roxma/nvim-yarp'
@@ -29,14 +30,15 @@ Plug 'shawncplus/phpcomplete.vim'
 
 Plug 'kien/ctrlp.vim'
 Plug 'davidhalter/jedi-vim'
-Plug 'guns/xterm-color-table.vim'
+"Plug 'guns/xterm-color-table.vim'
 
 "php
-Plug 'shawncplus/phpcomplete.vim'
+"Plug 'shawncplus/phpcomplete.vim'
 
 Plug 'ervandew/supertab'
 Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-markdown'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'scrooloose/nerdtree'
 Plug 'fatih/vim-go'
@@ -47,8 +49,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'nanotech/jellybeans.vim'
 Plug 'vim-scripts/AfterColors.vim'
 Plug 'd0c-s4vage/pct-vim', {'branch': 'feature-threads_and_tags'}
-Plug 'd0c-s4vage/pfp-vim'
+"Plug 'd0c-s4vage/pfp-vim'
 Plug 'godlygeek/tabular'
+Plug 'dhruvasagar/vim-table-mode'
 
 call plug#end()
 

@@ -6,6 +6,10 @@ else
     DOCKER="docker"
 fi
 
+function ddrop {
+    docker run --rm -it -v $(pwd):/pwd --workdir /pwd --entrypoint bash "$1"
+}
+
 function docker_netstat {
     image_name="$1"
     shift
