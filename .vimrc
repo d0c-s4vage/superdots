@@ -15,6 +15,28 @@ endif
 call plug#begin('~/.vim/plugged')
 
 
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+" (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf'
+
+
+let g:LanguageClient_serverCommands = {
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'ruby': ['/usr/local/bin/solargraph', 'stdio'],
+\ }
+
+
+" Plug 'tpope/vim-bundler'
+" Plug 'tpope/vim-dispatch'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+
+"Plug 'fishbullet/deoplete-ruby'
+"Plug 'uplus/deoplete-solargraph'
+
 "Plug 'rust-lang/rust.vim'
 Plug 'vim-scripts/SyntaxRange'
 Plug 'vim-syntastic/syntastic'
@@ -23,13 +45,17 @@ Plug 'honza/vim-snippets'
 Plug 'd0c-s4vage/vim-morph'
 "Plug 'shawncplus/phpcomplete.vim'
 
-"Plug 'Shougo/deoplete.nvim'
-"Plug 'roxma/nvim-yarp'
-"Plug 'roxma/vim-hug-neovim-rpc'
-"let g:deoplete#enable_at_startup = 1
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
 Plug 'kien/ctrlp.vim'
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 "Plug 'guns/xterm-color-table.vim'
 
 "php
