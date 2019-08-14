@@ -21,3 +21,30 @@ if [ -f "${SSH_ENV}" ]; then
 else
     start_agent;
 fi
+
+
+# Run a local ssh server in a docker container
+function g__ssh_local_start {
+    tmpdir=$(mktemp -d)
+    cat <<-EOF > "${tmpdir}/Dockerfile"
+FROM ubuntu
+RUN apt-get update && apt-get install -y openssh-server
+RUN useradd -m -d /host_home -s /bin/bash user
+RUN mkdir -p /run/sshd
+ENTRYPOINT ["/usr/sbin/sshd", "-D"]
+EOF
+    docker build -t g-local-ssh "${tmpdir}"
+    rm -rf "${tmpdir}"
+
+    docker run \
+        -d \
+        --rm \
+        -p 0.0.0.0:22:22 \
+        -v "${HOME}":/host_home \
+        --name g-local-ssh \
+        g-local-ssh
+}
+
+function g__ssh_local_stop {
+    docker kill g-local-ssh
+}

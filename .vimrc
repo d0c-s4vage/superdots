@@ -46,6 +46,7 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'd0c-s4vage/vim-morph'
 "Plug 'shawncplus/phpcomplete.vim'
+Plug 'rhysd/vim-grammarous'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }

@@ -2,6 +2,21 @@ snippet notimpl
 raise NotImplementedError("$1${2: is not implemented}")
 endsnippet
 
+snippet obj
+type(
+    "${1:TmpClass}",
+    (object,),
+    {
+        "${0:attr1}": "value",
+    },
+)()
+endsnippet
+
+snippet ---
+# -------------------------------------------------------------------------
+
+endsnippet
+
 snippet server
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
