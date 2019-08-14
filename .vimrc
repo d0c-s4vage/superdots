@@ -1,9 +1,11 @@
+set encoding=utf-8
 let s:this_dir = fnamemodify(resolve(expand('<sfile>:p')), ':h')
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+  let s:path = expand('<sfile>:p')
+  autocmd VimEnter * PlugInstall --sync | exit
 endif
 
 " copy everything in vim-scripts/after/colors to ~/.vim/after/colors
