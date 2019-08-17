@@ -4,7 +4,10 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 THIS_PROG="$0"
 
-
+meta-add_completion \
+    new_fn \
+    meta_completion \
+    _fn_file_completion
 function new_fn {
     if [ $# -ne 1 ] ; then
         echo "USAGE: new_fn FN_FILE_NAME"
@@ -16,14 +19,14 @@ function new_fn {
 
     if [ -e "${fnpath}" ] ; then
         start_cmd="Go\\<cr>"
-        snippet="new_bash_fn_plain"
+        snippet="new_bash_fn_plain\\<c-l>"
     else
         start_cmd="0i"
-        snippet="new_bash_fn\\<c-l>"
+        snippet="new_bash_fn\\<c-l>\\<c-l>\\<c-j>"
     fi
 
     vim \
-        -s <(echo -e ':execute "normal '${start_cmd}${snippet}'\\<c-l>\\<c-j>"') \
+        -s <(echo -e ':execute "normal '${start_cmd}${snippet}'"') \
         "$fnpath"
     
     if [ -e "$fnpath" ] ; then
@@ -34,6 +37,10 @@ function new_fn {
     fi
 }
 
+meta-add_completion \
+    edit_fn \
+    meta_completion \
+    _fn_file_completion
 function edit_fn {
     if [ $# -ne 1 ] ; then
         echo "USAGE: edit_fn FN_FILE_NAME"
@@ -43,5 +50,12 @@ function edit_fn {
     fn="$1"
     fnpath="${YOUR_MOM}/bash-sources/${fn}.sh"
 
+    if [ ! -e "${fnpath}" ] ; then
+        new_fn
+        return $?
+    fi
+
     vim "${fnpath}"
+    source "${fnpath}"
+    echo "new changes are ready for use"
 }

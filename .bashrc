@@ -3,6 +3,7 @@ export YOUR_MOM="$DIR"
 
 
 SOURCE_DIRS=(
+    "$DIR"/bash-source-pre/
     "$DIR"/bash-sources/
     ~/.bash-sources/
 )

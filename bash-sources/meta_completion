@@ -1,0 +1,10 @@
+function _fn_file_completion() {
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD]}"
+    opts="$(for fname in ${YOUR_MOM}/bash-sources/*.sh ; do basename "${fname}" | sed 's/\.sh//' ; done)"
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
+}

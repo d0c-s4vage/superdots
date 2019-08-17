@@ -1,20 +1,33 @@
+snippet completion
+function _${1:fn_name}() {
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD]}"
+    opts="$(${0})"
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
+}
+endsnippet
+
 snippet new_bash_fn
 #!${1:}function ${2:new_fn} {
-	if [ $# -ne 1 ] ; then
-		echo "USAGE: $2 ${3:FILENAME}"
-		return 1
-	fi
-	$0
+    if [ $# -ne 1 ] ; then
+        echo "USAGE: $2 ${3:FILENAME}"
+        return 1
+    fi
+    $0
 }
 endsnippet
 
 snippet new_bash_fn_plain
-function ${2:new_fn} {
-	if [ $# -ne 1 ] ; then
-		echo "USAGE: $2 ${3:FILENAME}"
-		return 1
-	fi
-	$0
+function ${1:new_fn} {
+    if [ $# -ne 1 ] ; then
+        echo "USAGE: $1 ${2:FILENAME}"
+        return 1
+    fi
+    $0
 }
 endsnippet
 
@@ -72,7 +85,7 @@ while [ $# -ne 0 ] ; do
             ;;
         --opt|-o)
             OPT="\$1"
-			shift
+            shift
             ;;
         *)
             echo "[!] Unrecognized parameter $param"
@@ -108,33 +121,33 @@ EOF
 
 
 function validate_options {
-	error=false
+    error=false
 
-	if [ -z "$OPT" ] ; then
-		echo "--opt must be set"
-		error=true
-	fi
+    if [ -z "$OPT" ] ; then
+        echo "--opt must be set"
+        error=true
+    fi
 
-	if [ "$error" = true ] ; then 
-		echo "Error validating options"
-		echo
-		show_help
-		exit 1
-	fi
+    if [ "$error" = true ] ; then 
+        echo "Error validating options"
+        echo
+        show_help
+        exit 1
+    fi
 }
 
 
 function run_program {
-	CMD=(
-		"$SUBPROGRAM"
+    CMD=(
+        "$SUBPROGRAM"
 
-		# default wrapped program options
-		${3:-la}
+        # default wrapped program options
+        ${3:-la}
 
-		"${$2[@]}"
-	)
-	echo "running command ${CMD[*]}"
-	"${CMD[@]}"
+        "${$2[@]}"
+    )
+    echo "running command ${CMD[*]}"
+    "${CMD[@]}"
 }
 
 
@@ -165,7 +178,7 @@ while [ $# -ne 0 ] ; do
             ;;
         --opt|-o)
             OPT="\$1"
-			shift
+            shift
             ;;
         *)
             echo "[!] Unrecognized parameter $param"
