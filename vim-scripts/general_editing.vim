@@ -54,7 +54,8 @@ function! ReplaceWord()
     set nohlsearch
     call winrestview(view)
 endfunction
-map <leader>R :call ReplaceWord()<CR>
+
+" map <leader>R :call ReplaceWord()<CR>
 
 map <leader>c :tabc<CR>
 
@@ -104,7 +105,7 @@ if system('git rev-parse --show-toplevel')[0] == "/"
     augroup END
 endif
 
-nnoremap <silent><leader>g <c-w><c-]><c-w>T
+" nnoremap <silent><leader>g <c-w><c-]><c-w>T
 
 
 

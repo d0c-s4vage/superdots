@@ -26,7 +26,9 @@ Plug 'junegunn/fzf'
 
 
 let g:LanguageClient_serverCommands = {
-    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'c': ['clangd-8'],
+    \ 'cpp': ['clangd-8'],
+    \ 'python': ['pyls'],
     \ 'ruby': ['/usr/local/bin/solargraph', 'stdio'],
 \ }
 

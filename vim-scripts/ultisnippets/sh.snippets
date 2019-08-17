@@ -1,3 +1,23 @@
+snippet new_bash_fn
+#!${1:}function ${2:new_fn} {
+	if [ $# -ne 1 ] ; then
+		echo "USAGE: $2 ${3:FILENAME}"
+		return 1
+	fi
+	$0
+}
+endsnippet
+
+snippet new_bash_fn_plain
+function ${2:new_fn} {
+	if [ $# -ne 1 ] ; then
+		echo "USAGE: $2 ${3:FILENAME}"
+		return 1
+	fi
+	$0
+}
+endsnippet
+
 snippet #!
 #!/usr/bin/env bash
 
