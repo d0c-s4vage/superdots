@@ -3,7 +3,7 @@
 function qr {
     (
         if [ ! -d /tmp/qr-venv ] ; then
-            venv /tmp/qr-venv
+            venv2 /tmp/qr-venv
             . /tmp/qr-venv/bin/activate
             pip install pyqrcode
         else

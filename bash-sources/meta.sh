@@ -59,3 +59,18 @@ function edit_fn {
     source "${fnpath}"
     echo "new changes are ready for use"
 }
+
+meta-add_completion \
+    fn \
+    meta_completion \
+    _fn_fn_completion
+function fn {
+    if [ $# -ne 1 ] ; then
+        echo "USAGE: fn FN_NAME"
+        return 1
+    fi
+
+    fn="$1"
+    shift
+    $fn "$@"
+}
