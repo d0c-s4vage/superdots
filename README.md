@@ -207,6 +207,8 @@ Not really used anymore, but sets up a few keybindings and statusline
 customizations. At one point I was using some trickery to merge the screen and
 vim clipboards.
 
+![superdots_screen](https://user-images.githubusercontent.com/5090146/63696170-fa6abb80-c7ce-11e9-812f-c74813a4e328.gif)
+
 ## Experimental/Silly
 
 Docker container with most common dependencies and superdot installed. The
