@@ -1,5 +1,7 @@
+#!/usr/bin/env bash
+
+
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-export YOUR_MOM="$DIR"
 
 
 SOURCE_DIRS=(
@@ -17,7 +19,7 @@ for source_dir in "${SOURCE_DIRS[@]}" ; do
     fi
 
     for file in "$source_dir"/*.sh ; do
-        if [ ! -z "$YOUR_MOM_DEBUG" ] ; then
+        if [ ! -z "$SUPERDOTS_DEBUG" ] ; then
             echo "Sourcing $file"
         fi
         . "$file"

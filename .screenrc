@@ -1,5 +1,5 @@
 startup_message off
-backtick 1 0 1 "$YOUR_MOM/bash-scripts/git-current-branch"
+backtick 1 0 1 "$SUPERDOTS/bash-scripts/git-current-branch"
 hardstatus string '%{= kG}%{= kw}%?%-Lw%?%{R}<%{R}%n*%f%t%?(%u)%?%{R}>%{w}%?%+Lw%?%?%= %{g}%{B} %d/%m %{W}%c %{g} %1`'
 hardstatus alwayslastline
 vbell off
