@@ -10,8 +10,10 @@ Super dot files.
 ## Table of Contents
 
 - [Usage](#usage)
+- [Why](#why)
 - [Features](#features)
   * [Home folder organization](#home-folder-organization)
+  * [Superdots Files Layout](#superdots-files-layout)
   * [Main Commands](#main-commands)
   * [Super-local usr directory](#super-local-usr-directory)
   * [Tmux](#tmux)
@@ -32,6 +34,14 @@ your:
 * .screenrc
 
 ![superdots_intro](https://user-images.githubusercontent.com/5090146/63693081-f7b89800-c7c7-11e9-8274-4df5063bf844.gif)
+
+## Why
+
+This is the result of occasional workspace/computer switches and trying to keep
+my work and personal development environments roughly in-sync. Previously my
+.vimrc and .bashrc were uncategorized, hard to add to, and unorganized. This is
+the result of a slow, consistent effort over the years to improve my personal
+development environment and efficiency.
 
 ## Features
 
@@ -68,6 +78,41 @@ $> tree -a -I .rbenv
     |-- rd
     `-- src
 ```
+
+### Superdots Files Layout
+
+Superdots has the directory structure below:
+
+```bash
+superdots/
+├── bash-scripts
+│   └── ...
+├── bash-source-pre
+│   └── ...
+├── bash-sources
+│   └── ...
+├── bin
+│   └── ...
+├── Dockerfile
+├── README.md
+└── vim-scripts
+    ├── after
+    │   └── colors
+    │       └── jellybeans.vim
+    ├── ultisnippets
+    │   └── ...
+    └── ...
+```
+
+* `bash-scripts` - Stand-alone executable scripts, not used too frequently
+* `bash-source-pre` - `*.sh` files that are sourced before sourcing bash-sources
+* `bash-sources` - `*.sh` files sourced after bash-source-pre files that
+    contain the main, categorized bash settings and function definitions
+    (filenames are completed with `fn_new` and `fn_edit`, defined function
+    names within these files are completed with `fn`)
+* `bin` - Utility scripts for installing superdots
+* `vim-scripts` - `*.vim` scripts sourced from the .vimrc that contain
+    categorized settings, functions, mappings, pseudo-plugins, etc
 
 ### Main Commands
 
