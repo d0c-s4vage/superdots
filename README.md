@@ -33,8 +33,7 @@ your:
 * .vimrc
 * .screenrc
 
-![superdots_intro](https://user-images.githubusercontent.com/5090146/63694748-fc7f4b00-c7cb-11e9-8341-47bd2ea86c77.gif)
-
+![superdots_intro](https://user-images.githubusercontent.com/5090146/63695978-a3fd7d00-c7ce-11e9-9670-11e5f8305340.gif)
 
 ## Why
 
