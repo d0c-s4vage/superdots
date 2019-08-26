@@ -79,7 +79,7 @@ Plug 'vim-airline/vim-airline-themes', { 'do': ':AirlineTheme tomorrow'}
 Plug 'airblade/vim-gitgutter'
 Plug 'nanotech/jellybeans.vim'
 Plug 'vim-scripts/AfterColors.vim'
-Plug 'd0c-s4vage/pct-vim', {'branch': 'feature-threads_and_tags'}
+"Plug 'd0c-s4vage/pct-vim', {'branch': 'feature-threads_and_tags'}
 "Plug 'd0c-s4vage/pfp-vim'
 Plug 'godlygeek/tabular'
 Plug 'dhruvasagar/vim-table-mode'

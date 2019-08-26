@@ -7,6 +7,8 @@ Super dot files.
 * Usable
 * Extendable
 
+## Table of Contents
+
 - [Usage](#usage)
 - [Features](#features)
   * [Home folder organization](#home-folder-organization)
@@ -28,6 +30,8 @@ your:
 * .tmux.conf
 * .vimrc
 * .screenrc
+
+![superdots_intro](https://user-images.githubusercontent.com/5090146/63693081-f7b89800-c7c7-11e9-8274-4df5063bf844.gif)
 
 ## Features
 
@@ -87,6 +91,15 @@ PATH.
 A core aspect to superdots is the `work` function, which makes creating,
 switching, and reattaching to tmux sessions easy. Works with tab-completion!
 
+Superdots also includes custom statusline settings to show:
+
+* tmux session name
+* current folder name
+* tabs
+* date / time
+* battery life
+* current branch name
+
 ### Bash
 
 Makes defining and tracking new bash snippets easy with the `fn_new`, `fn_edit`,
@@ -106,37 +119,36 @@ your superdots git repository.
 
 Plugins as of 2019-08-25 installed automatically with vim-plug:
 
+* [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
 * [autozimu/LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim)
-* [junegunn/fzf](https://github.com/junegunn/fzf)
-* [vim-ruby/vim-ruby](https://github.com/vim-ruby/vim-ruby)
-* [tpope/vim-rails](https://github.com/tpope/vim-rails)
-* [vim-scripts/SyntaxRange](https://github.com/vim-scripts/SyntaxRange)
-* [vim-syntastic/syntastic](https://github.com/vim-syntastic/syntastic)
-* [SirVer/ultisnips](https://github.com/SirVer/ultisnips)
-* [honza/vim-snippets](https://github.com/honza/vim-snippets)
 * [d0c-s4vage/vim-morph](https://github.com/d0c-s4vage/vim-morph)
+* [dhruvasagar/vim-table-mode](https://github.com/dhruvasagar/vim-table-mode)
+* [ervandew/supertab](https://github.com/ervandew/supertab)
+* [fatih/vim-go](https://github.com/fatih/vim-go)
+* [godlygeek/tabular](https://github.com/godlygeek/tabular)
+* [honza/vim-snippets](https://github.com/honza/vim-snippets)
+* [junegunn/fzf](https://github.com/junegunn/fzf)
+* [kien/ctrlp.vim](https://github.com/kien/ctrlp.vim)
+* [Lokaltog/vim-easymotion](https://github.com/Lokaltog/vim-easymotion)
+* [majutsushi/tagbar](https://github.com/majutsushi/tagbar)
+* [nanotech/jellybeans.vim](https://github.com/nanotech/jellybeans.vim)
+* [nvie/vim-flake8](https://github.com/nvie/vim-flake8)
 * [rhysd/vim-grammarous](https://github.com/rhysd/vim-grammarous)
-* [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim)
-* [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim)
 * [roxma/nvim-yarp](https://github.com/roxma/nvim-yarp)
 * [roxma/vim-hug-neovim-rpc](https://github.com/roxma/vim-hug-neovim-rpc)
-* [kien/ctrlp.vim](https://github.com/kien/ctrlp.vim)
-* [ervandew/supertab](https://github.com/ervandew/supertab)
-* [nvie/vim-flake8](https://github.com/nvie/vim-flake8)
+* [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
+* [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim)
+* [Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim)
+* [SirVer/ultisnips](https://github.com/SirVer/ultisnips)
 * [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
 * [tpope/vim-markdown](https://github.com/tpope/vim-markdown)
-* [Lokaltog/vim-easymotion](https://github.com/Lokaltog/vim-easymotion)
-* [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
-* [fatih/vim-go](https://github.com/fatih/vim-go)
-* [majutsushi/tagbar](https://github.com/majutsushi/tagbar)
+* [tpope/vim-rails](https://github.com/tpope/vim-rails)
 * [vim-airline/vim-airline](https://github.com/vim-airline/vim-airline)
 * [vim-airline/vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)
-* [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
-* [nanotech/jellybeans.vim](https://github.com/nanotech/jellybeans.vim)
+* [vim-ruby/vim-ruby](https://github.com/vim-ruby/vim-ruby)
 * [vim-scripts/AfterColors.vim](https://github.com/vim-scripts/AfterColors.vim)
-* [d0c-s4vage/pct-vim](https://github.com/d0c-s4vage/pct-vim)
-* [godlygeek/tabular](https://github.com/godlygeek/tabular)
-* [dhruvasagar/vim-table-mode](https://github.com/dhruvasagar/vim-table-mode)
+* [vim-scripts/SyntaxRange](https://github.com/vim-scripts/SyntaxRange)
+* [vim-syntastic/syntastic](https://github.com/vim-syntastic/syntastic)
 
 A few other ones are commented out that I use on occasion. See
 [superdot's .vimrc](https://github.com/d0c-s4vage/superdots/blob/master/.vimrc)

@@ -56,8 +56,11 @@ function fn_edit {
     fi
 
     vim "${fnpath}"
-    source "${fnpath}"
-    echo "new changes are ready for use"
+
+    if [ -f "${fnpath}" ] ; then
+        source "${fnpath}"
+        echo "new changes are ready for use"
+    fi
 }
 
 meta-add_completion \
@@ -65,7 +68,7 @@ meta-add_completion \
     meta_completion \
     _fn_fn_completion
 function fn {
-    if [ $# -ne 1 ] ; then
+    if [ $# -lt 1 ] ; then
         echo "USAGE: fn FN_NAME"
         return 1
     fi
