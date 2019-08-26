@@ -2,25 +2,27 @@
 
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
+SUPERDOTS_DIR="${DIR}/../"
 THIS_PROG="$0"
 
 set -e
 
 function source_vimrc {
-    echo -e "source ${DIR}/.vimrc" >> "${HOME}"/.vimrc
+    echo -e "source \${SUPERDOTS}/.vimrc" >> "${HOME}"/.vimrc
     mkdir -p "${HOME}"/.vim/autoload
 }
 
 function source_bashrc {
-    echo -e "source ${DIR}/.bashrc" >> "${HOME}"/.bashrc
+    echo -e "export SUPERDOTS=\"${SUPERDOTS_DIR}\"" >> "${HOME}"/.bashrc
+    echo -e "source \${SUPERDOTS}/.bashrc" >> "${HOME}"/.bashrc
 }
 
 function source_tmuxconf {
-    echo -e "source ${DIR}/.tmux.conf" >> "${HOME}"/.tmux.conf
+    echo -e "source \${SUPERDOTS}/.tmux.conf" >> "${HOME}"/.tmux.conf
 }
 
 function source_screenrc {
-    echo -e "source ${DIR}/.screenrc" >> "${HOME}"/.screenrc
+    echo -e "source \${SUPERDOTS}/.screenrc" >> "${HOME}"/.screenrc
 }
 
 function setup_usr_path {

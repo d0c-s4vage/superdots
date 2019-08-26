@@ -5,17 +5,17 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 THIS_PROG="$0"
 
 meta-add_completion \
-    new_fn \
+    fn_new \
     meta_completion \
     _fn_file_completion
-function new_fn {
+function fn_new {
     if [ $# -ne 1 ] ; then
         echo "USAGE: new_fn FN_FILE_NAME"
         return 1
     fi
 
     fn="$1"
-    fnpath="${YOUR_MOM}/bash-sources/${fn}.sh"
+    fnpath="${SUPERDOTS}/bash-sources/${fn}.sh"
 
     if [ -e "${fnpath}" ] ; then
         start_cmd="Go\\<cr>"
@@ -38,17 +38,17 @@ function new_fn {
 }
 
 meta-add_completion \
-    edit_fn \
+    fn_edit \
     meta_completion \
     _fn_file_completion
-function edit_fn {
+function fn_edit {
     if [ $# -ne 1 ] ; then
         echo "USAGE: edit_fn FN_FILE_NAME"
         return 1
     fi
 
     fn="$1"
-    fnpath="${YOUR_MOM}/bash-sources/${fn}.sh"
+    fnpath="${SUPERDOTS}/bash-sources/${fn}.sh"
 
     if [ ! -e "${fnpath}" ] ; then
         new_fn

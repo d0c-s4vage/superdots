@@ -6,7 +6,7 @@ THIS_PROG="$0"
 
 cd "$DIR"
 
-docker build -t d0c-s4vage/nixspace .
+docker build -t d0c-s4vage/superdots .
 
 docker run \
     --rm \
@@ -18,4 +18,4 @@ docker run \
     -v /dev:/dev \
     --net host \
     --name "${USER}-login" \
-    d0c-s4vage/nixspace:latest
+    d0c-s4vage/superdots:latest

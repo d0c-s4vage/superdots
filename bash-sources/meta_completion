@@ -3,7 +3,7 @@ function _fn_file_completion() {
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD]}"
-    opts="$(for fname in ${YOUR_MOM}/bash-sources/*.sh ; do basename "${fname}" | sed 's/\.sh//' ; done)"
+    opts="$(for fname in ${SUPERDOTS}/bash-sources/*.sh ; do basename "${fname}" | sed 's/\.sh//' ; done)"
 
     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
     return 0
@@ -14,7 +14,7 @@ function _fn_fn_completion() {
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD]}"
-    opts="$(grep -he "^function " "${YOUR_MOM}"/bash-sources/*.sh | sed 's/function\s*\(.*\)\s\s*.*/\1/g' | sort | uniq)"
+    opts="$(grep -he "^function " "${SUPERDOTS}"/bash-sources/*.sh | sed 's/function\s*\(.*\)\s\s*.*/\1/g' | sort | uniq)"
 
     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
     return 0

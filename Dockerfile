@@ -2,26 +2,28 @@ FROM ubuntu:latest
 
 RUN apt-get update \
     && apt-get install -y \
-        vim \
-        git \
-        wget \
-        curl \
-        tmux \
-        python-pip \
-        python3-pip \
-        powerline \
-        fonts-powerline \
-        python-powerline \
-        libncurses-dev \
-        readline-common \
-        libreadline7 \
-        python \
         build-essential \
-        tmux \
+        curl \
+        fonts-powerline \
+        gimp \
+        git \
+        htop \
+        libncurses-dev \
+        libreadline7 \
+        openvpn \
+        powerline \
+        python \
+        python3-pip \
+        python-pip \
+        python-powerline \
+        readline-common \
         screen \
         ssh \
-        gimp \
-        openvpn \
+        tmux \
+        tmux \
+        tree \
+        vim \
+        wget \
     && pip install peewee arrow virtualenv \
     && pip3 install peewee arrow virtualenv \
     && rm -rf /var/lib/apt/lists/* \
@@ -33,14 +35,17 @@ RUN useradd \
     -s /bin/bash \
     user
 
-#RUN git clone https://github.com/d0c-s4vage/dot-your-mom ~/.your-mom \
-COPY dot-your-mom /home/user/.your-mom
-RUN chown -R user:user /home/user/.your-mom/
+#RUN git clone https://github.com/d0c-s4vage/superdots ~/.superdots \
+COPY . /home/user/.superdots
+RUN chown -R user:user /home/user/.superdots/
 
 USER user
 ENV TERM=xterm-256color
 WORKDIR /home/user
 
-RUN /home/user/.your-mom/install.sh
+# don't add to sudoers! it's intended that the host user's home directory will
+# be mounted into this directory
+
+RUN /home/user/.superdots/bin/install
 
 ENTRYPOINT ["bash", "-il"]
