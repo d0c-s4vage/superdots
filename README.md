@@ -200,6 +200,8 @@ A few other ones are commented out that I use on occasion. See
 [superdot's .vimrc](https://github.com/d0c-s4vage/superdots/blob/master/.vimrc)
 for more info.
 
+![superdots_vim](https://user-images.githubusercontent.com/5090146/63695588-dfe41280-c7cd-11e9-9266-0e17723c2ba8.gif)
+
 ### Screen
 
 Not really used anymore, but sets up a few keybindings and statusline
