@@ -13,8 +13,15 @@ function source_vimrc {
 }
 
 function source_bashrc {
-    echo -e "export SUPERDOTS=\"${SUPERDOTS_DIR}\"" >> "${HOME}"/.bashrc
-    echo -e "source \${SUPERDOTS}/.bashrc" >> "${HOME}"/.bashrc
+    bashrc="${HOME}/.bashrc"
+    echo "bashrc $bashrc"
+    if [ ! -f "$bashrc" ] ; then
+        touch "$bashrc"
+    fi
+    # prepend
+    echo -e "export SUPERDOTS=\"${SUPERDOTS_DIR}\"\n$(cat "$bashrc")" > "$bashrc"
+    # append
+    echo "source \${SUPERDOTS}/.bashrc" >> "$bashrc"
 }
 
 function source_tmuxconf {
