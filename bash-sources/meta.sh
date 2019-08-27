@@ -4,10 +4,21 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 THIS_PROG="$0"
 
-meta-add_completion \
-    fn_new \
-    meta_completion \
-    _fn_file_completion
+function _fn_file_completion {
+    for fname in ${SUPERDOTS}/bash-sources/*.sh ; do
+        basename "${fname}" | sed 's/\.sh//'
+    done
+}
+
+function _fn_fn_completion {
+    grep -he "^function " "${SUPERDOTS}"/bash-sources/*.sh \
+        | sed 's/function\s*\(.*\)\s\s*.*/\1/g' \
+        | grep -v "^_" \
+        | sort \
+        | uniq
+}
+
+add_completion fn_new _fn_file_completion
 function fn_new {
     if [ $# -ne 1 ] ; then
         echo "USAGE: new_fn FN_FILE_NAME"
@@ -37,10 +48,7 @@ function fn_new {
     fi
 }
 
-meta-add_completion \
-    fn_edit \
-    meta_completion \
-    _fn_file_completion
+add_completion fn_edit _fn_file_completion
 function fn_edit {
     if [ $# -ne 1 ] ; then
         echo "USAGE: edit_fn FN_FILE_NAME"
@@ -63,10 +71,7 @@ function fn_edit {
     fi
 }
 
-meta-add_completion \
-    fn \
-    meta_completion \
-    _fn_fn_completion
+add_completion fn _fn_fn_completion
 function fn {
     if [ $# -lt 1 ] ; then
         echo "USAGE: fn FN_NAME"

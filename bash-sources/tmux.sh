@@ -2,10 +2,11 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null && pwd )"
 
-meta-add_completion \
-    work \
-    tmux_work_completion \
-    _work
+function _tmux_work_completion {
+    tmux ls | awk '{print $1}' | sed 's/://g' | grep -v '.*-[0-9]*$'
+}
+
+add_completion work _tmux_work_completion
 function work {
     session_name="$1"
 

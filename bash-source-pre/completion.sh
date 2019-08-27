@@ -2,14 +2,29 @@
 
 
 # defines bash completion utility functions
-function meta-add_completion {
+function add_completion {
     fn_name="$1"
-    completion_src="$2"
-    completion_fn="$3"
+    completion_fn="$2"
 
-    complete_line="complete -F ${completion_fn} ${fn_name}"
+    local tmp_fn="_${fn_name}__completion__"
+    local func_def=""
+    eval "function ${tmp_fn} { ${fn_name} ; }"
 
-    if [ ! -f ~/.bash_completion ] || ! grep "${complete_line}" ~/.bash_completion >/dev/null 2>&1 ; then
-        echo -e ". \"\${SUPERDOTS}/bash-sources/${completion_src}\" ; ${complete_line}" >> ~/.bash_completion
-    fi
+    read -r -d '' func_def <<EOF
+    function ${tmp_fn} {
+        COMPREPLY=()
+        cur="\${COMP_WORDS[COMP_CWORD]}"
+        prev="\${COMP_WORDS[COMP_CWORD]}"
+        opts="\$(${completion_fn})"
+
+        COMPREPLY=( \$(compgen -W "\${opts}" -- \${cur}) )
+        return 0
+    }
+EOF
+
+    # define the temporary function
+    eval "$func_def"
+
+    # assign the temporary function as the completion for fn_name
+    complete -F "${tmp_fn}" "${fn_name}"
 }
